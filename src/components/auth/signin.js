@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
 import * as actions from '../../actions';
 
@@ -28,4 +29,6 @@ class Signin extends Component {
 
 export default reduxForm({
     form: 'signin'
-}, null, actions)(Signin);
+})(
+    connect(null, actions )(Signin)
+);
