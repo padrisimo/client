@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import { Field, reduxForm } from 'redux-form';
+import * as actions from '../../actions';
 
 class Signin extends Component {
     handleFormSubmit(values) {
-        console.log(values);
+        this.props.signinUser(values);
     }
 
     render() {
@@ -27,4 +28,4 @@ class Signin extends Component {
 
 export default reduxForm({
     form: 'signin'
-})(Signin);
+}, null, actions)(Signin);
