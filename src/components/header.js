@@ -26,14 +26,12 @@ class Header extends Component {
 
     render() {
         return (
-            <div>
-                <nav className="navbar navbar-light">
+                <nav className="navbar navbar-light bg-faded m-b-2">
                     <Link to="/" className="navbar-brand">Redux Auth</Link>
-                    <ul className="nav navbar-nav">
+                    <ul className="navbar-nav list-unstyled">
                         {this.renderLinks()}
                     </ul>
                 </nav>
-            </div>
         );
     }
 }
