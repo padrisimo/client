@@ -6,25 +6,25 @@ import { connect } from 'react-redux';
 
 class Signup extends Component {
     handleFormSubmit(values) {
-        console.log(values)
+        console.log('u submit ', values)
     }
 
     render() {
-        const { handleSubmit } = this.props;
+        const { errors, handleSubmit } = this.props;
 
         return (
             <form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
                 <fieldset className="form-group">
                     <label>Email:</label>
-                    <Field component="input" type="email" name="email" className="form-control" />
+                    <Field component={renderField} type="email" name="email"/>
                 </fieldset>
                 <fieldset className="form-group">
                     <label>Password:</label>
-                    <Field component="input" type="password" name="password" className="form-control" />
+                    <Field component={renderField} type="password" name="password"/>
                 </fieldset>
                 <fieldset className="form-group">
                     <label>Confirm Password:</label>
-                    <Field component="input" type="password" name="passwordConfirm" className="form-control" />
+                    <Field component={renderField} type="password" name="passwordConfirm"/>
                 </fieldset>
                 <button action="submit" className="btn btn-primary">Sign Up</button>
             </form>
@@ -32,8 +32,27 @@ class Signup extends Component {
     }
 }
 
+const renderField = ({ input, type, meta: { touched, error } }) => (
+    <div>
+        <input {...input} type={type} className="form-control"/>
+        {touched && error && <span className="text-danger">{error}</span>}
+    </div>
+);
+
+const validate = values => {
+    const errors = {}
+
+    if (values.password !== values.passwordConfirm) {
+        errors.password = 'Passwords must match';
+    }
+
+    return errors
+}
+
+
 export default reduxForm({
-    form: 'signup'
+    form: 'signup',
+    validate
 })(
     connect(null, actions)(Signup)
     );
