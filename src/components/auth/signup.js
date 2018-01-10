@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 
 class Signup extends Component {
     handleFormSubmit(values) {
-        console.log('u submit ', values)
+        this.props.signupUser(values);
     }
 
     render() {

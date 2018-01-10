@@ -26,6 +26,14 @@ export function signinUser( values ) {
     }
 }
 
+export function signupUser(values){
+    const { email, password } = values;
+
+    return dispatch => {
+        axios.post(`${ROOT_URL}/signup`, {email, password})
+    }
+}
+
 export function authError(error) {
     return {
         type: AUTH_ERROR,
