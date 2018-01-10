@@ -29,9 +29,15 @@ export function signinUser( values ) {
 export function signupUser(values){
     const { email, password } = values;
 
-    return dispatch => {
+    return function (dispatch) {
         axios.post(`${ROOT_URL}/signup`, {email, password})
-    }
+            .then( response => {
+                dispatch({ type: AUTH_USER });
+                localStorage.setItem('token', response.data.token);
+                browserHistory.push('./feature');
+            })
+            .catch( err => dispatch(authError( err.response.data.error )));
+        }
 }
 
 export function authError(error) {
