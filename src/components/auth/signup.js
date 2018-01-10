@@ -42,8 +42,18 @@ const renderField = ({ input, type, meta: { touched, error } }) => (
 const validate = values => {
     const errors = {}
 
-    if (values.password !== values.passwordConfirm) {
-        errors.password = 'Passwords must match';
+    if (!values.email) {
+        errors.email = 'Please enter a valid email'
+    }
+    if (!values.password) {
+        errors.password = 'Please enter a password'
+    }
+    if (!values.passwordConfirm) {
+        errors.passwordConfirm = 'Please re-enter ur password'
+    }
+
+    if (values.passwordConfirm && (values.password !== values.passwordConfirm)) {
+        errors.passwordConfirm = 'Passwords must match';
     }
 
     return errors
