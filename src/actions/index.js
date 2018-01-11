@@ -18,7 +18,7 @@ export function signinUser( values ) {
                 // save the JWT
                 localStorage.setItem('token', response.data.token);
                 // redirect to the route
-                browserHistory.push('./feature');
+                browserHistory.push('/feature');
             })
             .catch(() => {
                 dispatch(authError('Bad Login Info'))
@@ -34,7 +34,7 @@ export function signupUser(values){
             .then( response => {
                 dispatch({ type: AUTH_USER });
                 localStorage.setItem('token', response.data.token);
-                browserHistory.push('./feature');
+                browserHistory.push('/feature');
             })
             .catch( err => dispatch(authError( err.response.data.error )));
         }
